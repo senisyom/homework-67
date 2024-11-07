@@ -1,11 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addToValues, deleteOneNumber, calculate } from "./CalculatorSlice";
+import {
+  addToValues,
+  deleteOneNumber,
+  calculate,
+  clearScreen,
+} from "./CalculatorSlice";
 
 import { RootState } from "../../app/store";
 
 const Calculator = () => {
-  const values = useSelector((state: RootState) => state.counter.values);
-  const result = useSelector((state: RootState) => state.counter.result);
+  const values = useSelector((state: RootState) => state.calculator.values);
+  const result = useSelector((state: RootState) => state.calculator.result);
   const dispatch = useDispatch();
 
   const buttons = [
@@ -25,6 +30,7 @@ const Calculator = () => {
     "/",
     "<",
     "=",
+    "C",
   ];
 
   const pickNumber = (value: string) => {
@@ -32,6 +38,8 @@ const Calculator = () => {
       dispatch(deleteOneNumber());
     } else if (value === "=") {
       dispatch(calculate());
+    } else if (value === "C") {
+      dispatch(clearScreen());
     } else {
       dispatch(addToValues(value));
     }

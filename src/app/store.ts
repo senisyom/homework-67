@@ -5,7 +5,7 @@ import { calculateReducer } from "../containers/Calculator/CalculatorSlice";
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-    calculateReducer,
+    calculator: calculateReducer,
   },
 });
 
