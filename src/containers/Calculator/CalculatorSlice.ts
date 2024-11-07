@@ -18,7 +18,8 @@ export const CounterSlice = createSlice({
       state.values = state.values.slice(0, -1);
     },
     clearScreen: (state) => {
-      state.values = "";
+        state.values = "";
+        state.result = ""
     },
 
     calculate: (state) => {
