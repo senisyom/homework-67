@@ -1,9 +1,12 @@
 import "./App.css";
+import Counter from "./containers/PasswordLock/PasswordLock";
 
 const App = () => {
   return (
     <>
-      <div></div>
+      <div>
+        <Counter />
+      </div>
     </>
   );
 };
