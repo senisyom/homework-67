@@ -1,24 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
-import { deleteNumber, increaseByNumber } from "./CounterSlice";
-import { RootState } from "@reduxjs/toolkit/query";
+import { pickOneNumber, deleteOneNumber } from "./CounterSlice";
+
+import { RootState } from "../../app/store";
 
 const PasswordLock = () => {
-  const counterValue = useSelector((state: RootState) => state.counter.value);
+  const counterValue = useSelector(
+    (state: RootState) => state.counter.currentValue
+  );
   const dispatch = useDispatch();
 
-  const buttons = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-    ["-", 0, "E"],
-  ];
+  const buttons = [1, 2, 3, 4, 5, 6, 7, 8, 9, "<", 0, "E"];
 
-  const handleButtonClick = (value) => {
-    if (value === "-") {
-      dispatch(deleteNumber());
-    } else if (value === "E") {
+  const pickNumber = (value: string) => {
+    if (value === "<") {
+      dispatch(deleteOneNumber());
     } else {
-      dispatch(increaseByNumber(Number(value)));
+      dispatch(pickOneNumber(value));
     }
   };
 
@@ -29,20 +26,23 @@ const PasswordLock = () => {
     >
       <div className="container-sm text-center">
         <div className="mb-3 display-4">{counterValue}</div>
-        <div className="d-flex flex-column align-items-center">
-          {buttons.map((numbers, index) => (
-            <div className="d-flex" key={index}>
-              {numbers.map((value) => (
-                <button
-                  key={value}
-                  className="btn btn-primary m-1"
-                  style={{ width: "80px", height: "60px" }}
-                  onClick={() => handleButtonClick(value)}
-                >
-                  {value}
-                </button>
-              ))}
-            </div>
+        <div
+          className="d-grid gap-1"
+          style={{
+            gridTemplateColumns: "repeat(3, 1fr)",
+            maxWidth: "240px",
+            margin: "0 auto",
+          }}
+        >
+          {buttons.map((value) => (
+            <button
+              key={value}
+              className="btn btn-primary m-1"
+              style={{ width: "80px", height: "60px" }}
+              onClick={() => pickNumber(value.toString())}
+            >
+              {value}
+            </button>
           ))}
         </div>
       </div>

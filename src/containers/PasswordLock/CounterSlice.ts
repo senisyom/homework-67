@@ -1,30 +1,33 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 
-interface CounterState {
-  value: number;
+export interface INumbers {
+  values: string
+}
+
+interface CounterState extends INumbers {
+  currentValue: string;
 }
 
 const initialState: CounterState = {
-  value: 0,
+  values: '',
+  currentValue: '',
 };
-
 
 export const CounterSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
-    addNumber: (state) => {
-      state.value += state.value;
+    pickOneNumber: (state, action: PayloadAction<string>) => {
+      if (state.currentValue.length < 4) {
+        state.currentValue += action.payload;
+      }
     },
-    deleteNumber: (state) => {
-      state.value -= 1;
-    },
-    increaseByNumber: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+
+    deleteOneNumber: (state) => {
+      state.currentValue = state.currentValue.slice(0, -1);
     },
   },
 });
 
 export const counterReducer = CounterSlice.reducer;
-
-export const { addNumber, deleteNumber, increaseByNumber } = CounterSlice.actions;
+export const { pickOneNumber, deleteOneNumber } = CounterSlice.actions;
