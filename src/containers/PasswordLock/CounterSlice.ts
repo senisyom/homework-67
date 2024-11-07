@@ -1,16 +1,18 @@
-import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface INumbers {
-  values: string
+  values: string;
 }
 
 interface CounterState extends INumbers {
   currentValue: string;
 }
 
+const correctPassword = "1337";
+
 const initialState: CounterState = {
-  values: '',
-  currentValue: '',
+  values: "",
+  currentValue: "",
 };
 
 export const CounterSlice = createSlice({
@@ -26,8 +28,16 @@ export const CounterSlice = createSlice({
     deleteOneNumber: (state) => {
       state.currentValue = state.currentValue.slice(0, -1);
     },
+
+    giveAccess: (state) => {
+      if (state.currentValue === correctPassword) {
+        state.currentValue = "Access granted";
+      } else {
+        state.currentValue = "Access denied";
+      }
+    },
   },
 });
 
 export const counterReducer = CounterSlice.reducer;
-export const { pickOneNumber, deleteOneNumber } = CounterSlice.actions;
+export const { pickOneNumber, deleteOneNumber, giveAccess } = CounterSlice.actions;

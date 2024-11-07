@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { pickOneNumber, deleteOneNumber } from "./CounterSlice";
+import { pickOneNumber, deleteOneNumber, giveAccess } from "./CounterSlice";
 
 import { RootState } from "../../app/store";
 
@@ -14,6 +14,8 @@ const PasswordLock = () => {
   const pickNumber = (value: string) => {
     if (value === "<") {
       dispatch(deleteOneNumber());
+    } else if (value === "E") {
+      dispatch(giveAccess());
     } else {
       dispatch(pickOneNumber(value));
     }
