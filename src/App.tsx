@@ -1,12 +1,19 @@
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import ToolBar from "./components/ToolBar/ToolBar";
 import Counter from "./containers/PasswordLock/PasswordLock";
+import Calculator from "./containers/Calculator/Calculator";
 
 const App = () => {
   return (
     <>
-      <div>
-        <Counter />
-      </div>
+      <header>
+        <ToolBar />
+      </header>
+      <Routes>
+        <Route path="/" element={<Counter />} />
+        <Route path="/calculator" element={<Calculator />} />
+      </Routes>
     </>
   );
 };

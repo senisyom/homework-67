@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { counterReducer } from "../containers/PasswordLock/CounterSlice";
+import { counterReducer } from "../containers/PasswordLock/PasswordSlice";
+import { calculateReducer } from "../containers/Calculator/CalculatorSlice";
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
+    calculateReducer,
   },
 });
 

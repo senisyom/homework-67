@@ -36,8 +36,17 @@ export const CounterSlice = createSlice({
         state.currentValue = "Access denied";
       }
     },
+    clearScreen: (state) => {
+      if (
+        state.currentValue === "Access granted" ||
+        state.currentValue === "Access denied"
+      ) {
+        state.currentValue = "";
+      }
+    },
   },
 });
 
 export const counterReducer = CounterSlice.reducer;
-export const { pickOneNumber, deleteOneNumber, giveAccess } = CounterSlice.actions;
+export const { pickOneNumber, deleteOneNumber, giveAccess, clearScreen } =
+  CounterSlice.actions;

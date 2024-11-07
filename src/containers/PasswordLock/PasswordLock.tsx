@@ -1,5 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { pickOneNumber, deleteOneNumber, giveAccess } from "./CounterSlice";
+import {
+  pickOneNumber,
+  deleteOneNumber,
+  giveAccess,
+  clearScreen,
+} from "./PasswordSlice";
 
 import { RootState } from "../../app/store";
 
@@ -16,18 +21,38 @@ const PasswordLock = () => {
       dispatch(deleteOneNumber());
     } else if (value === "E") {
       dispatch(giveAccess());
+
+      setTimeout(() => {
+        dispatch(clearScreen());
+      }, 500);
     } else {
       dispatch(pickOneNumber(value));
     }
   };
+
+  const showStars = "*".repeat(counterValue.length);
+
+  const screenColor =
+    counterValue === "Access granted"
+      ? "green"
+      : counterValue === "Access denied"
+      ? "red"
+      : "black";
 
   return (
     <div
       className="d-flex justify-content-center align-items-center"
       style={{ minHeight: "100vh" }}
     >
-      <div className="container-sm text-center">
-        <div className="mb-3 display-4">{counterValue}</div>
+      <div className="container-sm text-center ">
+        <h3 className="mb-4">Password Lock</h3>
+
+        <div className="mb-3 mt-5 display-4" style={{ color: screenColor }}>
+          {counterValue === "Access granted" || counterValue === "Access denied"
+            ? counterValue
+            : showStars}
+        </div>
+
         <div
           className="d-grid gap-1"
           style={{
